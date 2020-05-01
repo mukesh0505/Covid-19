@@ -47,4 +47,11 @@ class MainViewModel(
             .subscribeOn(Schedulers.io())
             .subscribe()
     }
+
+    fun sortCovidData(covidData: CovidData): Observable<CovidData> = Observable.create {
+        val sorted = covidData.Countries.sortedBy {
+            it.TotalConfirmed
+        }.reversed()
+        it.onNext(CovidData(covidData.Global, sorted))
+    }
 }

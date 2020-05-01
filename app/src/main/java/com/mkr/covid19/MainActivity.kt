@@ -1,6 +1,9 @@
 package com.mkr.covid19
 
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.telephony.TelephonyManager
 import android.view.View
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
@@ -9,8 +12,13 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import com.mkr.covid19.adapter.CovidListAdapter
 import com.mkr.covid19.databinding.ActivityMainBinding
+import com.mkr.covid19.model.CovidData
 import com.mkr.covid19.repository.CovidService
+import com.mkr.covid19.utils.Utils
 import com.mkr.covid19.viewModel.MainViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -40,14 +48,7 @@ class MainActivity : AppCompatActivity() {
     private fun bindViewModel() {
         binding.apply {
             viewModel.covidData.observe(this@MainActivity, Observer {
-                showCovidLayout()
-                countryData.adapter = CovidListAdapter(it)
-                confirmedCount.text = it.Global.TotalConfirmed.toString()
-                confirmedDayCount.text = it.Global.NewConfirmed.toString()
-                recoveredCount.text = it.Global.TotalRecovered.toString()
-                recoveredDayCount.text = it.Global.NewRecovered.toString()
-                deceasedCount.text = it.Global.TotalDeaths.toString()
-                deseasedDayCount.text = it.Global.NewDeaths.toString()
+                sortData(it)
             })
             viewModel.errorObservable.subscribe {
                 binding.apply {
@@ -55,6 +56,26 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun sortData(covidData: CovidData) {
+        viewModel.sortCovidData(covidData)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                binding.apply {
+                    showCovidLayout()
+                    countryData.adapter = CovidListAdapter(it)
+                    confirmedCount.text = Utils.getFormattedNumber(it.Global.TotalConfirmed)
+                    confirmedDayCount.text = Utils.getFormattedNumber(it.Global.NewConfirmed)
+                    recoveredCount.text = Utils.getFormattedNumber(it.Global.TotalRecovered)
+                    recoveredDayCount.text = Utils.getFormattedNumber(it.Global.NewRecovered)
+                    deceasedCount.text = Utils.getFormattedNumber(it.Global.TotalDeaths)
+                    deseasedDayCount.text = Utils.getFormattedNumber(it.Global.NewDeaths)
+                    updateUserLocation(it)
+                }
+            }
     }
 
     private fun showCovidLayout() {
@@ -71,5 +92,27 @@ class MainActivity : AppCompatActivity() {
             loader.visibility = View.GONE
             failed.visibility = View.VISIBLE
         }
+    }
+
+    private fun updateUserLocation(data: CovidData) {
+        val countryCode = getUserCountryCode()
+        val countryData = data.Countries.first { it.CountryCode.equals(countryCode.first, true) }
+        binding.apply {
+            countryData.let {
+                acrossCountry.text = String.format(getString(R.string.across_country), countryCode.second)
+                countryConfirmedCount.text = Utils.getFormattedNumber(it.TotalConfirmed)
+                countryConfirmedDayCount.text = Utils.getFormattedNumber(it.NewConfirmed)
+                countryRecoveredCount.text = Utils.getFormattedNumber(it.TotalRecovered)
+                countryRecoveredDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
+                countryDeceasedCount.text = Utils.getFormattedNumber(it.TotalDeaths)
+                countryDeseasedDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
+            }
+        }
+    }
+
+    private fun getUserCountryCode(): Pair<String, String> {
+        val tm =
+            this.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+        return Pair(tm.networkCountryIso, Locale("", tm.networkCountryIso.capitalize()).displayCountry)
     }
 }

@@ -6,14 +6,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.mkr.covid19.databinding.ItemCovidCountryBinding
 import com.mkr.covid19.model.CountryData
 import com.mkr.covid19.model.CovidData
+import com.mkr.covid19.utils.Utils
 
 class CovidListAdapter(
-    covidData: CovidData
+    private val covidData: CovidData
 ) : RecyclerView.Adapter<CovidListAdapter.CovidItem>() {
 
-    private val countryData = covidData.Countries.sortedBy {
-        it.TotalConfirmed
-    }.reversed()
+    private val countryData = covidData.Countries
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CovidItem {
         val itemBinding =
@@ -33,12 +32,12 @@ class CovidListAdapter(
             binding.apply {
                 data.let {
                     country.text = it.Country
-                    confirmedCount.text = it.TotalConfirmed.toString()
-                    confirmedDayCount.text = it.NewConfirmed.toString()
-                    recoveredCount.text = it.TotalRecovered.toString()
-                    recoveredDayCount.text = it.NewRecovered.toString()
-                    deceasedCount.text = it.TotalDeaths.toString()
-                    deseasedDayCount.text = it.NewDeaths.toString()
+                    confirmedCount.text = Utils.getFormattedNumber(it.TotalConfirmed)
+                    confirmedDayCount.text = Utils.getFormattedNumber(it.NewConfirmed)
+                    recoveredCount.text = Utils.getFormattedNumber(it.TotalRecovered)
+                    recoveredDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
+                    deceasedCount.text = Utils.getFormattedNumber(it.TotalDeaths)
+                    deseasedDayCount.text = Utils.getFormattedNumber(it.NewDeaths)
                 }
             }
         }
