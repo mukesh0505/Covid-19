@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="5dp">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/country"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight=".3"
+                    android:gravity="center_vertical"
+                    android:textColor="#000000"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="India" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.24"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/confirmed_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        android:textColor="#f00"
+                        tools:text="1000000" />
+
+                    <TextView
+                        android:id="@+id/confirmed_day_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_red_arrow_up"
+                        android:drawablePadding="2dp"
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
+                        android:textColor="#f00"
+                        tools:text="1000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.23"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/recovered_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        android:textColor="#006400"
+                        tools:text="1000000" />
+
+                    <TextView
+                        android:id="@+id/recovered_day_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_green_arrow_up"
+                        android:drawablePadding="2dp"
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
+                        android:textColor="#006400"
+                        tools:text="1000" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0.23"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/deceased_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="textEnd"
+                        android:textSize="14sp"
+                        android:textColor="#000000"
+                        tools:text="1000000" />
+
+                    <TextView
+                        android:id="@+id/deseased_day_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableEnd="@drawable/ic_black_arrow_up"
+                        android:drawablePadding="2dp"
+                        android:textAlignment="textEnd"
+                        android:textSize="12sp"
+                        android:textColor="#000000"
+                        tools:text="1000" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
