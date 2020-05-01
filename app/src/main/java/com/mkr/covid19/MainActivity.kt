@@ -105,7 +105,7 @@ class MainActivity : AppCompatActivity() {
                 countryRecoveredCount.text = Utils.getFormattedNumber(it.TotalRecovered)
                 countryRecoveredDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
                 countryDeceasedCount.text = Utils.getFormattedNumber(it.TotalDeaths)
-                countryDeseasedDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
+                countryDeseasedDayCount.text = Utils.getFormattedNumber(it.NewDeaths)
             }
         }
     }
