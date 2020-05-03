@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.mkr.covid19">
+    package="com.mkr.covid19" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -11,8 +11,11 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/ic_logo"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".SplashActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".StateActivity" >
+        </activity>
+        <activity android:name=".IndiaActivity" />
+        <activity android:name=".SplashActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,7 +24,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:theme="@style/NoActionBar"/>
+            android:theme="@style/NoActionBar" />
     </application>
 
 </manifest>

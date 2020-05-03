@@ -2,6 +2,7 @@ package com.mkr.covid19
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.telephony.TelephonyManager
 import android.view.View
@@ -42,6 +43,10 @@ class MainActivity : AppCompatActivity() {
     private fun setUpView() {
         binding.countryData.apply {
             addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
+        }
+        binding.country.setOnClickListener {
+            val intent = Intent(this, IndiaActivity::class.java)
+            startActivity(intent)
         }
     }
 
