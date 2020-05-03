@@ -45,6 +45,12 @@ class MainActivity : AppCompatActivity() {
             addItemDecoration(DividerItemDecoration(this@MainActivity, LinearLayout.VERTICAL))
         }
         binding.country.setOnClickListener {
+            if(getUserCountryCode().first.equals("IN", true)) {
+                val intent = Intent(this, IndiaActivity::class.java)
+                startActivity(intent)
+            }
+        }
+        binding.moreDetails.setOnClickListener {
             val intent = Intent(this, IndiaActivity::class.java)
             startActivity(intent)
         }
@@ -111,6 +117,9 @@ class MainActivity : AppCompatActivity() {
                 countryRecoveredDayCount.text = Utils.getFormattedNumber(it.NewRecovered)
                 countryDeceasedCount.text = Utils.getFormattedNumber(it.TotalDeaths)
                 countryDeseasedDayCount.text = Utils.getFormattedNumber(it.NewDeaths)
+                if (countryCode.first.equals("IN", true)) {
+                    moreDetails.visibility = View.VISIBLE
+                }
             }
         }
     }

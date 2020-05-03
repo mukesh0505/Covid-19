@@ -230,6 +230,7 @@
                     android:background="@drawable/rounded_border_background"
                     android:orientation="horizontal"
                     android:padding="5dp"
+                    android:foreground="?android:attr/selectableItemBackground"
                     android:weightSum="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -359,6 +360,17 @@
 
                 </LinearLayout>
 
+                <TextView
+                    android:id="@+id/more_details"
+                    android:text="@string/click_here_for_more_details"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#000"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/country"/>
+
                 <LinearLayout
                     android:id="@+id/header"
                     android:layout_width="match_parent"
@@ -368,7 +380,7 @@
                     android:weightSum="1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/country">
+                    app:layout_constraintTop_toBottomOf="@id/more_details">
 
                     <TextView
                         android:layout_width="wrap_content"
