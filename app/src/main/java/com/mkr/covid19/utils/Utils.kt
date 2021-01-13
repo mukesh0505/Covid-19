@@ -2,7 +2,6 @@ package com.mkr.covid19.utils
 
 import java.text.DecimalFormat
 
-
 object Utils {
 
     fun getCountryImageUrl(countryCode: String): String {
